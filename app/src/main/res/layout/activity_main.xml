@@ -7,28 +7,39 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/boas_vindas"
-        android:onClick="meuClique"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Descubra seu perfil de saúde e receba recomendações personalizadas."
-        android:gravity="center"
-        android:layout_marginHorizontal="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
-
-    <Button
-        android:id="@+id/save_bt"
-        android:onClick="mainActivityClique"
+        android:id="@+id/in_fit_plus_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comece aqui"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="50sp"
+        android:text="@string/app_title"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/start_bt"
+        />
+
+    <TextView
+        android:id="@+id/welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/welcome_message"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/in_fit_plus_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/start_bt"
+        />
+
+    <Button
+        android:id="@+id/start_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comece_aqui"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcome_tv"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
