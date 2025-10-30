@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityPersonalDataBinding
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
 
 class PersonalDataActivity : AppCompatActivity() {
     private val apdb: ActivityPersonalDataBinding by lazy {
@@ -31,13 +32,20 @@ class PersonalDataActivity : AppCompatActivity() {
                 Toast.makeText(this@PersonalDataActivity, "Dados válidos! Calculando...", Toast.LENGTH_SHORT).show()
 
                 val imc = weight / (height * height)
-                val imcFormatado = String.format("%.2f", imc)
 
-                Toast.makeText(
-                    this@PersonalDataActivity,
-                    "IMC de $name: $imcFormatado",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val personalData = PersonalData(
+                    name = name,
+                    age = age,
+                    sex = sex,
+                    height = height,
+                    weight = weight,
+                    activityLevel = activityLevel,
+                    imc = imc
+                )
+
+                val intent = Intent(this@PersonalDataActivity, ImcResultActivity::class.java)
+                intent.putExtra("personalData", personalData)
+                startActivity(intent)
             }
         }
     }
@@ -81,18 +89,6 @@ class PersonalDataActivity : AppCompatActivity() {
                 weightEt.error = "Peso inválido"
                 weightEt.requestFocus()
                 Toast.makeText(this@PersonalDataActivity, "Informe um peso válido (> 0).", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            val spinnerValue = activityLevelSp.selectedItem?.toString() ?: ""
-            if (spinnerValue.isEmpty() || spinnerValue.equals("Selecione", ignoreCase = true)) {
-                Toast.makeText(this@PersonalDataActivity, "Selecione seu nível de atividade.", Toast.LENGTH_SHORT).show()
-                activityLevelSp.requestFocus()
-                return false
-            }
-
-            if (sexRg.checkedRadioButtonId == -1) {
-                Toast.makeText(this@PersonalDataActivity, "Selecione o sexo.", Toast.LENGTH_SHORT).show()
                 return false
             }
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImcResultActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="100sp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nome_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YYYYYYYYYY"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/imc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXXXXXXXXXX"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/categoria_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ZZZZZZZZZZ"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+            android:id="@+id/calcular_gasto_calorico_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="calcular_gasto_calorico"
+            app:layout_constraintTop_toBottomOf="@id/categoria_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/voltar_bt"/>
+
+        <Button
+            android:id="@+id/voltar_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="voltar"
+            app:layout_constraintTop_toBottomOf="@id/calcular_gasto_calorico_bt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
