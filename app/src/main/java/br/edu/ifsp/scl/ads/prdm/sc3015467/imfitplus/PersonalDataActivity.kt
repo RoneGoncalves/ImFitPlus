@@ -29,8 +29,6 @@ class PersonalDataActivity : AppCompatActivity() {
                 }
                 val activityLevel = activityLevelSp.selectedItem.toString()
 
-                Toast.makeText(this@PersonalDataActivity, "Dados válidos! Calculando...", Toast.LENGTH_SHORT).show()
-
                 val imc = weight / (height * height)
 
                 val personalData = PersonalData(

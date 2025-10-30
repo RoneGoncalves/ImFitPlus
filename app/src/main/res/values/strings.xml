@@ -18,6 +18,8 @@
     <string name="user_weight">Peso</string>
     <string name="user_activity_level">Nível de atividade</string>
     <string name="calculate_imc">Calcule seu IMC</string>
+    <string name="back">voltar</string>
+    <string name="calculate_calorie_expenditure_bt">Calcular gasto calorico</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>
