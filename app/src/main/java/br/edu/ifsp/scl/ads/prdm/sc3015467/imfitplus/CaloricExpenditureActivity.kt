@@ -37,14 +37,14 @@ class CaloricExpenditureActivity : AppCompatActivity() {
             }
         }
 
-        aceb.calculateCalorieExpenditureBt.setOnClickListener {
+        aceb.calculateIdealWeightBt.setOnClickListener {
             val intent = Intent(this, IdealWeightActivity::class.java)
             intent.putExtra(PERSONAL_DATA, personalData)
             startActivity(intent)
         }
 
         aceb.backBt.setOnClickListener {
-            startActivity(Intent(this, PersonalDataActivity::class.java))
+            finish()
         }
     }
 

@@ -42,7 +42,7 @@ class ImcResultActivity : AppCompatActivity() {
         }
 
         airb.backBt.setOnClickListener {
-            startActivity(Intent(this, PersonalDataActivity::class.java))
+            finish()
         }
     }
     fun getImcCategory(imc: Float): String {

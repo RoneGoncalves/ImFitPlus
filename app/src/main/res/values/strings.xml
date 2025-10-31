@@ -24,7 +24,6 @@
     <string name="tmb_result">Resultado do TMB</string>
     <string name="calculate_ideal_weight">Calcular peso ideal</string>
     <string name="finish_app">Finalizar aplicação</string>
-    <string name="ideal_weight">Peso ideal</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>

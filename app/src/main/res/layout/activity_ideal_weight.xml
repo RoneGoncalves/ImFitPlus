@@ -27,43 +27,25 @@
             app:layout_constraintBottom_toTopOf="@id/imc_result_message_tv" />
 
         <TextView
-            android:id="@+id/ideal_weight_message_tv"
+            android:id="@+id/name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text=""
             android:textSize="30sp"
-            android:text="@string/ideal_weight"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/name_tv"
-            android:layout_marginTop="35dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
-            android:id="@+id/weight_tv"
+            android:id="@+id/ideal_weight_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Peso ideal aqui"
+            android:text=""
             android:textSize="30sp"/>
-
-        <TextView
-            android:id="@+id/weight_difference_message_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="@string/ideal_weight"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/name_tv"
-            android:layout_marginTop="35dp"/>
 
         <TextView
             android:id="@+id/weight_difference_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Diferenca de peso aqui"
+            android:text=""
             android:textSize="25sp"/>
     </LinearLayout>
 
