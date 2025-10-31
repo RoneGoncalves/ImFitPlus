@@ -29,7 +29,7 @@ class IdealWeightActivity : AppCompatActivity() {
 
             with(aiwb) {
                 nameTv.text = personalData.name
-                idealWeightTv.text = String.format("Peso ideal: %.2f", personalData.weight)
+                idealWeightTv.text = String.format("Peso ideal: %.2f", idealWeight)
                 weightDifferenceTv.text = String.format("Diferença: %.2f", weightDifference)
             }
         }
