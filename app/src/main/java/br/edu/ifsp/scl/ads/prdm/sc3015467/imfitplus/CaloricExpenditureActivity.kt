@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityCaloricExpenditureBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants.PERSONAL_DATA
 
 class CaloricExpenditureActivity : AppCompatActivity() {
     private  val ceab: ActivityCaloricExpenditureBinding by lazy {
@@ -16,10 +17,10 @@ class CaloricExpenditureActivity : AppCompatActivity() {
         setContentView(ceab.root)
 
         val personalData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("personalData", PersonalData::class.java)
+            intent.getParcelableExtra(PERSONAL_DATA, PersonalData::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra("personalData")
+            intent.getParcelableExtra(PERSONAL_DATA)
         }
 
         personalData?.let {

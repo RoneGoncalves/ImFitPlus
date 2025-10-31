@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityImcResultBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants.PERSONAL_DATA
 
 class ImcResultActivity : AppCompatActivity() {
     private val airb: ActivityImcResultBinding by lazy {
@@ -17,15 +18,15 @@ class ImcResultActivity : AppCompatActivity() {
         setContentView(airb.root)
 
         val personalData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("personalData", PersonalData::class.java)
+            intent.getParcelableExtra(PERSONAL_DATA, PersonalData::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra("personalData")
+            intent.getParcelableExtra(PERSONAL_DATA)
         }
 
         personalData?.let {
             val formatedImc = String.format("IMC: %.2f", personalData.imc)
-            val category = getImcCategory(personalData.imc)
+            val category = "Categoria: ${getImcCategory(personalData.imc)}"
 
             with(airb) {
                 nameTv.text = personalData.name
@@ -36,8 +37,8 @@ class ImcResultActivity : AppCompatActivity() {
 
         airb.calculateCalorieExpenditureBt.setOnClickListener {
             val intent = Intent(this, CaloricExpenditureActivity::class.java)
-                intent.putExtra("personalData", personalData)
-                startActivity(intent)
+            intent.putExtra(PERSONAL_DATA, personalData)
+            startActivity(intent)
         }
 
         airb.backBt.setOnClickListener {

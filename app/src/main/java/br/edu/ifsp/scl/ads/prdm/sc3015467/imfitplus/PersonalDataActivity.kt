@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityPersonalDataBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants
 
 class PersonalDataActivity : AppCompatActivity() {
     private val apdb: ActivityPersonalDataBinding by lazy {
@@ -25,7 +26,7 @@ class PersonalDataActivity : AppCompatActivity() {
                 val sex = when (sexRg.checkedRadioButtonId) {
                     R.id.female_rb -> "Feminino"
                     R.id.male_rb -> "Masculino"
-                    else -> "Não informado"
+                    else -> ""
                 }
                 val activityLevel = activityLevelSp.selectedItem.toString()
 
@@ -42,7 +43,7 @@ class PersonalDataActivity : AppCompatActivity() {
                 )
 
                 val intent = Intent(this@PersonalDataActivity, ImcResultActivity::class.java)
-                intent.putExtra("personalData", personalData)
+                intent.putExtra(Constants.PERSONAL_DATA, personalData)
                 startActivity(intent)
             }
         }
