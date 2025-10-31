@@ -20,6 +20,8 @@
     <string name="calculate_imc">Calcule seu IMC</string>
     <string name="back">voltar</string>
     <string name="calculate_calorie_expenditure_bt">Calcular gasto calorico</string>
+    <string name="imc_result">Resultado do IMC</string>
+    <string name="tmb_result">Resultado do TMB</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>

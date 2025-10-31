@@ -9,6 +9,19 @@
     tools:context=".PersonalDataActivity">
 
     <TextView
+        android:id="@+id/in_fit_plus_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:text="@string/app_title"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/personal_data_tv"
+        />
+
+    <TextView
         android:id="@+id/personal_data_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

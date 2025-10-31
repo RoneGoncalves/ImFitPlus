@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImcResultActivity">
+    tools:context=".CaloricExpenditureActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="@string/imc_result"
+            android:text="@string/tmb_result"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginTop="35dp"/>
 
         <TextView
-            android:id="@+id/name_tv"
+            android:id="@+id/tmb_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -48,14 +48,14 @@
             android:layout_marginTop="15dp"/>
 
         <TextView
-            android:id="@+id/imc_tv"
+            android:id="@+id/tmb_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="25sp"/>
 
         <TextView
-            android:id="@+id/category_tv"
+            android:id="@+id/daily_expenditure_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

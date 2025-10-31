@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,16 @@ class ImcResultActivity : AppCompatActivity() {
                 imcTv.text = formatedImc
                 categoryTv.text = category
             }
+        }
+
+        airb.calculateCalorieExpenditureBt.setOnClickListener {
+            val intent = Intent(this, CaloricExpenditureActivity::class.java)
+                intent.putExtra("personalData", personalData)
+                startActivity(intent)
+        }
+
+        airb.backBt.setOnClickListener {
+            startActivity(Intent(this, PersonalDataActivity::class.java))
         }
     }
     fun getImcCategory(imc: Float): String {
