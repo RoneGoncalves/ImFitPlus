@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityPersonalDataBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
-import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils
 
 class PersonalDataActivity : AppCompatActivity() {
     private val apdb: ActivityPersonalDataBinding by lazy {
@@ -43,7 +43,7 @@ class PersonalDataActivity : AppCompatActivity() {
                 )
 
                 val intent = Intent(this@PersonalDataActivity, ImcResultActivity::class.java)
-                intent.putExtra(Constants.PERSONAL_DATA, personalData)
+                intent.putExtra(ConstantsUtils.PERSONAL_DATA, personalData)
                 startActivity(intent)
             }
         }

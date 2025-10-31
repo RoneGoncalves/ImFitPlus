@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityIdealWeightBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
-import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants.PERSONAL_DATA
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
 import kotlin.math.abs
 
 class IdealWeightActivity : AppCompatActivity() {

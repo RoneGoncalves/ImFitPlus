@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityCaloricExpenditureBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
-import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants.PERSONAL_DATA
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
 
 class CaloricExpenditureActivity : AppCompatActivity() {
     private  val aceb: ActivityCaloricExpenditureBinding by lazy {
