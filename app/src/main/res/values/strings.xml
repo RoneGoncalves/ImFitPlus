@@ -19,9 +19,12 @@
     <string name="user_activity_level">Nível de atividade</string>
     <string name="calculate_imc">Calcule seu IMC</string>
     <string name="back">voltar</string>
-    <string name="calculate_calorie_expenditure_bt">Calcular gasto calorico</string>
+    <string name="calculate_calorie_expenditure">Calcular gasto calorico</string>
     <string name="imc_result">Resultado do IMC</string>
     <string name="tmb_result">Resultado do TMB</string>
+    <string name="calculate_ideal_weight">Calcular peso ideal</string>
+    <string name="finish_app">Finalizar aplicação</string>
+    <string name="ideal_weight">Peso ideal</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>

@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,13 +9,13 @@ import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.Constants.PERSONAL_DATA
 
 class CaloricExpenditureActivity : AppCompatActivity() {
-    private  val ceab: ActivityCaloricExpenditureBinding by lazy {
+    private  val aceb: ActivityCaloricExpenditureBinding by lazy {
         ActivityCaloricExpenditureBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(ceab.root)
+        setContentView(aceb.root)
 
         val personalData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(PERSONAL_DATA, PersonalData::class.java)
@@ -28,12 +29,22 @@ class CaloricExpenditureActivity : AppCompatActivity() {
             val activityFactor = getActivityFactor(personalData.activityLevel)
             val dailyExpenditure = tmb * activityFactor
 
-            with(ceab) {
+            with(aceb) {
                 tmbNameTv.text = personalData.name
                 tmbTv.text = String.format("TMB: %.2f", tmb)
                 dailyExpenditureTv.text = String.format("Gasto calórico diário: %.2f", dailyExpenditure)
 
             }
+        }
+
+        aceb.calculateCalorieExpenditureBt.setOnClickListener {
+            val intent = Intent(this, IdealWeightActivity::class.java)
+            intent.putExtra(PERSONAL_DATA, personalData)
+            startActivity(intent)
+        }
+
+        aceb.backBt.setOnClickListener {
+            startActivity(Intent(this, PersonalDataActivity::class.java))
         }
     }
 
