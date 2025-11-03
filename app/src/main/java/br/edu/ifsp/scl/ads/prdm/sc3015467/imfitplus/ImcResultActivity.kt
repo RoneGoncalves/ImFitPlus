@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityImcResultBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
-import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalDataCat
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
 
 class ImcResultActivity : AppCompatActivity() {
@@ -26,30 +26,20 @@ class ImcResultActivity : AppCompatActivity() {
         }
 
         personalData?.let {
-            val formatedImc = String.format("IMC: %.2f", personalData.imc)
-            val category = "Categoria: ${getImcCategory(personalData.imc)}"
+            val formattedImc = String.format("IMC: %.2f", personalData.imc)
+            val category = getImcCategory(personalData.imc)
 
             with(airb) {
                 nameTv.text = personalData.name
-                imcTv.text = formatedImc
+                imcTv.text = formattedImc
                 categoryTv.text = category
             }
         }
 
-        val personalDataCat = PersonalDataCat(
-            name = personalData.name,
-            age = personalData.age,
-            sex = personalData.sex,
-            height = personalData.height,
-            weight = personalData.weight,
-            activityLevel = personalData.activityLevel,
-            imc = personalData.imc,
-            imcCat = getImcCategory(personalData.imc)
-        )
-
         airb.calculateCalorieExpenditureBt.setOnClickListener {
             val intent = Intent(this, CaloricExpenditureActivity::class.java)
-            intent.putExtra("personalDataTMB", personalDataCat)
+            intent.putExtra(PERSONAL_DATA, personalData)
+            intent.putExtra(IMC_CATEGORY, personalData?.let { it1 -> getImcCategory(it1.imc) })
             startActivity(intent)
         }
 

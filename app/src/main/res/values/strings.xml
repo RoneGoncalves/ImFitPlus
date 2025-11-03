@@ -24,7 +24,8 @@
     <string name="tmb_result">Resultado do TMB</string>
     <string name="calculate_ideal_weight">Calcular peso ideal</string>
     <string name="finish_app">Finalizar aplicação</string>
-    <string name="n_o_se_esque_a_de_beber_bastante_gua">Não se esqueça de beber bastante água!!</string>
+    <string name="imc_report">Ver resultados finas</string>
+    <string name="drink_water">Não se esqueça de beber bastante água!!</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>

@@ -1,11 +1,16 @@
 package br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityIdealWeightBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.DAILY_EXPENDITURE
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IDEAL_WEIGHT
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.TMB
 import kotlin.math.abs
 
 class IdealWeightActivity : AppCompatActivity() {
@@ -23,10 +28,14 @@ class IdealWeightActivity : AppCompatActivity() {
             intent.getParcelableExtra(PERSONAL_DATA)
         }
 
-        personalData?.let {
-            val idealWeight = calculateIdealWeight(personalData.height)
-            val weightDifference = calculateWeightDifference(personalData.weight, idealWeight)
+        val imcCategory = intent.getStringExtra(IMC_CATEGORY)
+        val tmb = intent.getStringExtra(TMB)
+        val dailyExpenditure = intent.getStringExtra(DAILY_EXPENDITURE)
 
+        val idealWeight = personalData?.let { calculateIdealWeight(it.height) }
+        val weightDifference = personalData?.let { idealWeight?.let { it1 -> calculateWeightDifference(it.weight, it1) } }
+
+        personalData?.let {
             with(aiwb) {
                 nameTv.text = personalData.name
                 idealWeightTv.text = String.format("Peso ideal: %.2f", idealWeight)
@@ -34,12 +43,18 @@ class IdealWeightActivity : AppCompatActivity() {
             }
         }
 
-        aiwb.backBt.setOnClickListener {
-            finish()
+        aiwb.imcReport.setOnClickListener {
+            val intent = Intent(this, HealthReportActivity::class.java)
+            intent.putExtra(PERSONAL_DATA, personalData)
+            intent.putExtra(IMC_CATEGORY, imcCategory)
+            intent.putExtra(TMB, tmb)
+            intent.putExtra(DAILY_EXPENDITURE, dailyExpenditure)
+            intent.putExtra(IDEAL_WEIGHT, String.format("Peso ideal: %.2f", idealWeight))
+            startActivity(intent)
         }
 
-        aiwb.finishAppBt.setOnClickListener {
-            finishAffinity()
+        aiwb.backBt.setOnClickListener {
+            finish()
         }
     }
 

@@ -27,39 +27,44 @@
             app:layout_constraintBottom_toTopOf="@id/imc_result_message_tv" />
 
         <TextView
-            android:id="@+id/tmb_name_tv"
+            android:id="@+id/report_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textSize="30sp"
             android:layout_marginTop="15dp"/>
 
         <TextView
-            android:id="@+id/tmb_tv"
+            android:id="@+id/report_imc_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/report_category_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/report_tmb_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="25sp"/>
 
         <TextView
-            android:id="@+id/imc_tv"
+            android:id="@+id/report_daily_expenditure_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textSize="25sp"/>
 
         <TextView
-            android:id="@+id/daily_expenditure_tv"
+            android:id="@+id/report_ideal_weight_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textSize="25sp"/>
 
         <TextView
-            android:id="@+id/drinkWater_tv"
+            android:id="@+id/report_drinkWater_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/n_o_se_esque_a_de_beber_bastante_gua"
             android:textSize="25sp"/>
     </LinearLayout>
 

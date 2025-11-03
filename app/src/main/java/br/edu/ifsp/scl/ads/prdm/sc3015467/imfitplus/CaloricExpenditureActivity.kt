@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityCaloricExpenditureBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalDataTMB
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.DAILY_EXPENDITURE
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.TMB
 
 class CaloricExpenditureActivity : AppCompatActivity() {
     private  val aceb: ActivityCaloricExpenditureBinding by lazy {
@@ -24,22 +28,26 @@ class CaloricExpenditureActivity : AppCompatActivity() {
             intent.getParcelableExtra(PERSONAL_DATA)
         }
 
-        personalData?.let {
-            val tmb = calculateTMB(personalData)
-            val activityFactor = getActivityFactor(personalData.activityLevel)
-            val dailyExpenditure = tmb * activityFactor
+        val imcCategory = intent.getStringExtra(IMC_CATEGORY)
 
+        val tmb = personalData?.let { calculateTMB(it) }
+        val activityFactor = personalData?.let { getActivityFactor(it.activityLevel) }
+        val dailyExpenditure = activityFactor?.let { tmb?.times(it) }
+
+        personalData?.let {
             with(aceb) {
                 tmbNameTv.text = personalData.name
                 tmbTv.text = String.format("TMB: %.2f", tmb)
                 dailyExpenditureTv.text = String.format("Gasto calórico diário: %.2f", dailyExpenditure)
-
             }
         }
 
         aceb.calculateIdealWeightBt.setOnClickListener {
             val intent = Intent(this, IdealWeightActivity::class.java)
             intent.putExtra(PERSONAL_DATA, personalData)
+            intent.putExtra(IMC_CATEGORY, imcCategory)
+            intent.putExtra(TMB, String.format("TMB: %.2f", tmb))
+            intent.putExtra(DAILY_EXPENDITURE, String.format("Gasto calórico diário: %.2f", dailyExpenditure))
             startActivity(intent)
         }
 

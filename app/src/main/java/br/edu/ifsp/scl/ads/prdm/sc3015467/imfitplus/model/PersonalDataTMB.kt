@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PersonalDataCat (
+data class PersonalDataTMB (
     val name: String,
     val age: Int,
     val sex: String,
@@ -12,5 +12,7 @@ data class PersonalDataCat (
     val weight: Float,
     val activityLevel: String,
     val imc: Float,
-    val imcCat: String
+    val imcCat: String,
+    val tmb: String
 ) : Parcelable
+
