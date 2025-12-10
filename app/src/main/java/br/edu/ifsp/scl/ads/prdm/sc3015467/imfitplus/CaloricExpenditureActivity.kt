@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityCaloricExpenditureBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
-import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalDataTMB
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.DAILY_EXPENDITURE
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
