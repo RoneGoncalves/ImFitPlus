@@ -5,94 +5,130 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityPersonalDataBinding
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.ImFitPlusDatabase
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PersonalDataActivity : AppCompatActivity() {
+
+    private lateinit var db: ImFitPlusDatabase
+
     private val apdb: ActivityPersonalDataBinding by lazy {
         ActivityPersonalDataBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(apdb.root)
 
-        with(apdb) {
-            calculateBt.setOnClickListener {
-                if (!validateInputs()) return@setOnClickListener
-                val name = nameEt.text.toString().trim()
-                val age = ageEt.text.toString().toInt()
-                val height = heightEt.text.toString().toFloat()
-                val weight = weightEt.text.toString().toFloat()
-                val sex = when (sexRg.checkedRadioButtonId) {
-                    R.id.female_rb -> "Feminino"
-                    R.id.male_rb -> "Masculino"
-                    else -> ""
-                }
-                val activityLevel = activityLevelSp.selectedItem.toString()
+        db = ImFitPlusDatabase.getDatabase(this)
 
-                val imc = weight / (height * height)
+        // Carrega os dados salvos, se existirem
+        loadPersonalData()
+
+        with(apdb) {
+
+            calculateBt.setOnClickListener {
+
+                if (!validateInputs()) return@setOnClickListener
 
                 val personalData = PersonalData(
-                    name = name,
-                    age = age,
-                    sex = sex,
-                    height = height,
-                    weight = weight,
-                    activityLevel = activityLevel,
-                    imc = imc
+                    name = nameEt.text.toString().trim(),
+                    age = ageEt.text.toString().toInt(),
+                    sex = when (sexRg.checkedRadioButtonId) {
+                        R.id.female_rb -> "Feminino"
+                        R.id.male_rb -> "Masculino"
+                        else -> ""
+                    },
+                    height = heightEt.text.toString().toFloat(),
+                    weight = weightEt.text.toString().toFloat(),
+                    activityLevel = activityLevelSp.selectedItem.toString(),
+                    imc = 0f // IMC NÃO SERÁ PERSISTIDO AQUI
                 )
 
-                val intent = Intent(this@PersonalDataActivity, ImcResultActivity::class.java)
-                intent.putExtra(ConstantsUtils.PERSONAL_DATA, personalData)
+                // Persiste os dados antes de seguir
+                savePersonalData(personalData)
+
+                // Calcula IMC só para próxima tela
+                val imc = personalData.weight /
+                        (personalData.height * personalData.height)
+
+                val dataToSend = personalData.copy(imc = imc)
+
+                val intent = Intent(
+                    this@PersonalDataActivity,
+                    ImcResultActivity::class.java
+                )
+                intent.putExtra(ConstantsUtils.PERSONAL_DATA, dataToSend)
                 startActivity(intent)
             }
         }
     }
 
+    private fun loadPersonalData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val saved = db.personalDataDao().getPersonalData()
+
+            saved?.let {
+                withContext(Dispatchers.Main) {
+                    apdb.nameEt.setText(it.name)
+                    apdb.ageEt.setText(it.age.toString())
+                    apdb.heightEt.setText(it.height.toString())
+                    apdb.weightEt.setText(it.weight.toString())
+
+                    // Seleciona sexo
+                    when (it.sex) {
+                        "Feminino" -> apdb.femaleRb.isChecked = true
+                        "Masculino" -> apdb.maleRb.isChecked = true
+                    }
+
+                    // Seleciona nível de atividade
+                    val pos = resources.getStringArray(R.array.activity_level)
+                        .indexOf(it.activityLevel)
+
+                    if (pos >= 0) apdb.activityLevelSp.setSelection(pos)
+                }
+            }
+        }
+    }
+
+    private fun savePersonalData(personalData: PersonalData) {
+        CoroutineScope(Dispatchers.IO).launch {
+            db.personalDataDao().save(personalData)
+        }
+    }
+
     private fun validateInputs(): Boolean {
         with(apdb) {
-
             val name = nameEt.text.toString().trim()
             if (name.isEmpty()) {
                 nameEt.error = "Informe o nome"
-                nameEt.requestFocus()
-                Toast.makeText(this@PersonalDataActivity, "Por favor, informe o nome.", Toast.LENGTH_SHORT).show()
                 return false
             }
 
-            val ageStr = ageEt.text.toString().trim()
-            val age = ageStr.toIntOrNull()
-            if (ageStr.isEmpty() || age == null) {
+            val age = ageEt.text.toString().toIntOrNull()
+            if (age == null || age !in 1..120) {
                 ageEt.error = "Idade inválida"
-                ageEt.requestFocus()
-                Toast.makeText(this@PersonalDataActivity, "Informe uma idade válida.", Toast.LENGTH_SHORT).show()
-                return false
-            }
-            if (age !in 1..120) {
-                ageEt.error = "Idade deve estar entre 1 e 120"
-                ageEt.requestFocus()
-                Toast.makeText(this@PersonalDataActivity, "Idade fora do intervalo esperado (1-120).", Toast.LENGTH_SHORT).show()
                 return false
             }
 
             val height = heightEt.text.toString().toFloatOrNull()
             if (height == null || height <= 0f) {
                 heightEt.error = "Altura inválida"
-                heightEt.requestFocus()
-                Toast.makeText(this@PersonalDataActivity, "Informe uma altura válida (> 0).", Toast.LENGTH_SHORT).show()
                 return false
             }
 
             val weight = weightEt.text.toString().toFloatOrNull()
             if (weight == null || weight <= 0f) {
                 weightEt.error = "Peso inválido"
-                weightEt.requestFocus()
-                Toast.makeText(this@PersonalDataActivity, "Informe um peso válido (> 0).", Toast.LENGTH_SHORT).show()
                 return false
             }
 
             return true
         }
     }
-
 }
