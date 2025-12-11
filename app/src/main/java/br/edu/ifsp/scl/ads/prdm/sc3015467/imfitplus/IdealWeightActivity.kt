@@ -43,7 +43,7 @@ class IdealWeightActivity : AppCompatActivity() {
             }
         }
 
-        aiwb.imcReport.setOnClickListener {
+        aiwb.imcReportBt.setOnClickListener {
             val intent = Intent(this, HealthReportActivity::class.java)
             intent.putExtra(PERSONAL_DATA, personalData)
             intent.putExtra(IMC_CATEGORY, imcCategory)

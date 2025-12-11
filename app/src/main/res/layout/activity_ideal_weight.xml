@@ -55,7 +55,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
         <Button
-            android:id="@+id/imc_report"
+            android:id="@+id/imc_report_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"

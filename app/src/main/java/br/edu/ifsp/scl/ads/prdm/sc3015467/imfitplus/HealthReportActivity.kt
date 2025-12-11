@@ -41,5 +41,13 @@ class HealthReportActivity : AppCompatActivity() {
         ahrb.reportIdealWeightTv.text = idealWeight
         ahrb.reportDailyExpenditureTv.text = dailyExpenditure
         ahrb.reportDrinkWaterTv.text = getString(R.string.drink_water)
+
+        ahrb.backBt.setOnClickListener {
+            finish()
+        }
+
+        ahrb.finishBt.setOnClickListener {
+            finishAffinity()
+        }
     }
 }
