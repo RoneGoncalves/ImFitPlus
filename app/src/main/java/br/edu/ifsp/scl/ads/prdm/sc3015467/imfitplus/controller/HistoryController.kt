@@ -14,23 +14,7 @@ class HistoryController(context: Context) {
         calculationDao.insert(calc)
     }
 
-    suspend fun updateCalculation(calc: Calculation): Int = withContext(Dispatchers.IO) {
-        calculationDao.update(calc)
-    }
-
-    suspend fun deleteCalculation(calc: Calculation): Int = withContext(Dispatchers.IO) {
-        calculationDao.delete(calc)
-    }
-
-    suspend fun getCalculationById(id: Int): Calculation? = withContext(Dispatchers.IO) {
-        calculationDao.getById(id)
-    }
-
-    suspend fun getCalculationsByUser(userId: Int): List<Calculation> = withContext(Dispatchers.IO) {
-        calculationDao.getByUser(userId)
-    }
-
-    suspend fun getAllCalculations(): List<Calculation> = withContext(Dispatchers.IO) {
-        calculationDao.getAll()
+    suspend fun getCalculationHistory() = withContext(Dispatchers.IO) {
+        calculationDao.getCalculationHistory()
     }
 }

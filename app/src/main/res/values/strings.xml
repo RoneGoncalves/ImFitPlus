@@ -26,6 +26,8 @@
     <string name="finish_app">Finalizar aplicação</string>
     <string name="imc_report">Ver resultados finas</string>
     <string name="drink_water">Não se esqueça de beber bastante água!!</string>
+    <string name="calculation_history">Histórico de Cálculos</string>
+    <string name="see_calculation_history">Ver histórico</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>

@@ -6,6 +6,14 @@
     android:padding="12dp">
 
     <TextView
+        android:id="@+id/userNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Usuário" />
+
+    <TextView
         android:id="@+id/imcTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -3,7 +3,6 @@ package br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityPersonalDataBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.ImFitPlusDatabase
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
@@ -27,10 +26,17 @@ class PersonalDataActivity : AppCompatActivity() {
 
         db = ImFitPlusDatabase.getDatabase(this)
 
-        // Carrega os dados salvos, se existirem
         loadPersonalData()
 
         with(apdb) {
+
+            historyBt.setOnClickListener {
+                val intent = Intent(
+                    this@PersonalDataActivity,
+                    CalculationHistoryActivity::class.java
+                )
+                startActivity(intent)
+            }
 
             calculateBt.setOnClickListener {
 
