@@ -12,7 +12,7 @@ data class PersonalData(
     var id: Int? = null,
 
     var name: String = "",
-    var age: Int = 0,
+    var birtDate: String = "",
     var sex: String = "",
     var height: Float = 0f,
     var weight: Float = 0f,

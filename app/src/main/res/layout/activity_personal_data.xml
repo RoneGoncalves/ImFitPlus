@@ -40,13 +40,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/personal_data_tv"
-        app:layout_constraintBottom_toTopOf="@+id/age_et"/>
+        app:layout_constraintBottom_toTopOf="@+id/birth_date_et"/>
 
     <EditText
-        android:id="@+id/age_et"
+        android:id="@+id/birth_date_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/user_age"
+        android:hint="@string/birth_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/personal_data_tv"

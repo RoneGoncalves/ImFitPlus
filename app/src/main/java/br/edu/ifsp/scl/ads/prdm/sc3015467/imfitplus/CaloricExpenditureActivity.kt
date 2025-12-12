@@ -4,18 +4,22 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityCaloricExpenditureBinding
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.DAILY_EXPENDITURE
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.TMB
+import java.time.LocalDate
+import java.time.Period
 
 class CaloricExpenditureActivity : AppCompatActivity() {
     private  val aceb: ActivityCaloricExpenditureBinding by lazy {
         ActivityCaloricExpenditureBinding.inflate(layoutInflater)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(aceb.root)
@@ -32,12 +36,14 @@ class CaloricExpenditureActivity : AppCompatActivity() {
         val tmb = personalData?.let { calculateTMB(it) }
         val activityFactor = personalData?.let { getActivityFactor(it.activityLevel) }
         val dailyExpenditure = activityFactor?.let { tmb?.times(it) }
+        val maxFC = (220 - calculateAge(personalData?.birtDate.toString())).toString()
 
         personalData?.let {
             with(aceb) {
                 tmbNameTv.text = personalData.name
                 tmbTv.text = String.format("TMB: %.2f", tmb)
                 dailyExpenditureTv.text = String.format("Gasto calórico diário: %.2f", dailyExpenditure)
+                maxFcTv.text = maxFC;
             }
         }
 
@@ -55,11 +61,20 @@ class CaloricExpenditureActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun calculateAge(data: String): Int {
+        val birthDate = LocalDate.parse(data);
+        val currentDate = LocalDate.now()
+        return Period.between(birthDate , currentDate).years
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun calculateTMB(data: PersonalData): Double {
+
         return if (data.sex == "Masculino") {
-            66 + (13.7 * data.weight) + (5 * data.height * 100) - (6.8 * data.age)
+            66 + (13.7 * data.weight) + (5 * data.height * 100) - (6.8 * calculateAge(data.birtDate))
         } else {
-            655 + (9.6 * data.weight) + (1.8 * data.height * 100) - (4.7 * data.age)
+            655 + (9.6 * data.weight) + (1.8 * data.height * 100) - (4.7 * calculateAge(data.birtDate))
         }
     }
 

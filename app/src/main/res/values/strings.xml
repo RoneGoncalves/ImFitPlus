@@ -28,6 +28,7 @@
     <string name="drink_water">Não se esqueça de beber bastante água!!</string>
     <string name="calculation_history">Histórico de Cálculos</string>
     <string name="see_calculation_history">Ver histórico</string>
+    <string name="birth_date">Data Nascimento(AAAA-MM-DD)</string>
     <string-array name="activity_level">
         <item>Sedentário</item>
         <item>Leve</item>
