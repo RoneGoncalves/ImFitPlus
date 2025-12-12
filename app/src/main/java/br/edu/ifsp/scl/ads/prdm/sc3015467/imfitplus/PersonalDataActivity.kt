@@ -47,25 +47,31 @@ class PersonalDataActivity : AppCompatActivity() {
                     height = heightEt.text.toString().toFloat(),
                     weight = weightEt.text.toString().toFloat(),
                     activityLevel = activityLevelSp.selectedItem.toString(),
-                    imc = 0f // IMC NÃO SERÁ PERSISTIDO AQUI
+                    imc = 0f
                 )
 
-                // Persiste os dados antes de seguir
-                savePersonalData(personalData)
+                CoroutineScope(Dispatchers.IO).launch {
 
-                // Calcula IMC só para próxima tela
-                val imc = personalData.weight /
-                        (personalData.height * personalData.height)
+                    val id = db.personalDataDao().save(personalData)
 
-                val dataToSend = personalData.copy(imc = imc)
+                    val updatedPersonalData = personalData.copy(id = id.toInt())
 
-                val intent = Intent(
-                    this@PersonalDataActivity,
-                    ImcResultActivity::class.java
-                )
-                intent.putExtra(ConstantsUtils.PERSONAL_DATA, dataToSend)
-                startActivity(intent)
+                    val imc = updatedPersonalData.weight /
+                            (updatedPersonalData.height * updatedPersonalData.height)
+
+                    val dataToSend = updatedPersonalData.copy(imc = imc)
+
+                    withContext(Dispatchers.Main) {
+                        val intent = Intent(
+                            this@PersonalDataActivity,
+                            ImcResultActivity::class.java
+                        )
+                        intent.putExtra(ConstantsUtils.PERSONAL_DATA, dataToSend)
+                        startActivity(intent)
+                    }
+                }
             }
+
         }
     }
 
@@ -80,13 +86,11 @@ class PersonalDataActivity : AppCompatActivity() {
                     apdb.heightEt.setText(it.height.toString())
                     apdb.weightEt.setText(it.weight.toString())
 
-                    // Seleciona sexo
                     when (it.sex) {
                         "Feminino" -> apdb.femaleRb.isChecked = true
                         "Masculino" -> apdb.maleRb.isChecked = true
                     }
 
-                    // Seleciona nível de atividade
                     val pos = resources.getStringArray(R.array.activity_level)
                         .indexOf(it.activityLevel)
 

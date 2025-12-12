@@ -4,13 +4,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.controller.HistoryController
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.databinding.ActivityIdealWeightBinding
+import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.Calculation
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.DAILY_EXPENDITURE
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IDEAL_WEIGHT
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.IMC_CATEGORY
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.PERSONAL_DATA
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.utils.ConstantsUtils.TMB
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class IdealWeightActivity : AppCompatActivity() {
@@ -37,9 +41,21 @@ class IdealWeightActivity : AppCompatActivity() {
 
         personalData?.let {
             with(aiwb) {
-                nameTv.text = personalData.name
+                nameTv.text = it.name
                 idealWeightTv.text = String.format("Peso ideal: %.2f", idealWeight)
                 weightDifferenceTv.text = String.format("Diferença: %.2f", weightDifference)
+            }
+
+            val calculation = Calculation(
+                userId = it.id ?: 0,
+                imc = it.imc,
+                category = imcCategory ?: "",
+                tmb = tmb?.toFloatOrNull() ?: 0f,
+                idealWeight = idealWeight ?: 0f
+            )
+
+            lifecycleScope.launch {
+                HistoryController(this@IdealWeightActivity).saveCalculation(calculation)
             }
         }
 

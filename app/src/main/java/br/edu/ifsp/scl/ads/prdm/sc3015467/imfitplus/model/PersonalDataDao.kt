@@ -10,7 +10,7 @@ import androidx.room.Query
 interface PersonalDataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(personalData: PersonalData)
+    suspend fun save(personalData: PersonalData): Long
 
     @Query("SELECT * FROM personal_data LIMIT 1")
     suspend fun getPersonalData(): PersonalData?

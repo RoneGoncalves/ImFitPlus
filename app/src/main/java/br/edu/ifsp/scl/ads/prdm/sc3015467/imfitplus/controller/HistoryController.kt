@@ -3,32 +3,34 @@ package br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.controller
 import android.content.Context
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.Calculation
 import br.edu.ifsp.scl.ads.prdm.sc3015467.imfitplus.model.ImFitPlusDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class HistoryController(context: Context) {
 
     private val calculationDao = ImFitPlusDatabase.getDatabase(context).calculationDao()
 
-    fun saveCalculation(calc: Calculation): Long {
-        return calculationDao.insert(calc)
+    suspend fun saveCalculation(calc: Calculation): Long = withContext(Dispatchers.IO) {
+        calculationDao.insert(calc)
     }
 
-    fun updateCalculation(calc: Calculation): Int {
-        return calculationDao.update(calc)
+    suspend fun updateCalculation(calc: Calculation): Int = withContext(Dispatchers.IO) {
+        calculationDao.update(calc)
     }
 
-    fun deleteCalculation(calc: Calculation): Int {
-        return calculationDao.delete(calc)
+    suspend fun deleteCalculation(calc: Calculation): Int = withContext(Dispatchers.IO) {
+        calculationDao.delete(calc)
     }
 
-    fun getCalculationById(id: Int): Calculation? {
-        return calculationDao.getById(id)
+    suspend fun getCalculationById(id: Int): Calculation? = withContext(Dispatchers.IO) {
+        calculationDao.getById(id)
     }
 
-    fun getCalculationsByUser(userId: Int): List<Calculation> {
-        return calculationDao.getByUser(userId)
+    suspend fun getCalculationsByUser(userId: Int): List<Calculation> = withContext(Dispatchers.IO) {
+        calculationDao.getByUser(userId)
     }
 
-    fun getAllCalculations(): List<Calculation> {
-        return calculationDao.getAll()
+    suspend fun getAllCalculations(): List<Calculation> = withContext(Dispatchers.IO) {
+        calculationDao.getAll()
     }
 }
